@@ -16,9 +16,17 @@ app.use(bodyParser.json());
 
 // MongoDB Connection
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/striderealm';
-mongoose.connect(MONGO_URI)
-    .then(() => console.log('✅ Connected to MongoDB'))
-    .catch(err => console.error('❌ DB Connection Error:', err));
+mongoose.connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+})
+    .then(() => {
+        console.log('✅ Connected to MongoDB');
+        seedHotZones(); // Only seed when connected
+    })
+    .catch(err => {
+        console.error('❌ DB Connection Error:', err);
+        console.log('⚠️ Server running in logic-only mode (DB Unreachable)');
+    });
 
 // --- HEALTH CHECK ---
 app.get('/api/health', (req, res) => {
@@ -99,7 +107,6 @@ const seedHotZones = async () => {
         console.log('🔥 Seeded Surat Focus Hot Zones');
     }
 };
-seedHotZones();
 
 // --- AUTH ENDPOINTS ---
 
