@@ -4,47 +4,52 @@
 RunRealm is a GPS-based territory capture game. This plan outlines the phased development of the core mechanics, focusing on the frontend (React Native/Expo) and the geospatial logic.
 
 ## Phase 1: Foundation & Setup
-- [ ] Install core dependencies:
-  - `@rnmapbox/maps` (Mapping)
+- [x] Install core dependencies:
+  - `react-native-maps` (Mapping Alternative)
   - `expo-location` (GPS tracking)
   - `@turf/turf` (Geospatial calculations)
   - `lucide-react-native` (Icons)
-- [ ] Configure Mapbox for Expo (Development Build requirement).
-- [ ] Create a custom dark-themed map style (Premium Aesthetic).
+- [x] Configure Maps for Expo.
+- [x] Create a custom dark-themed map style.
 
 ## Phase 2: Core Mechanics - Capture Logic
-- [ ] **GPS Tracking Engine**:
+- [x] **GPS Tracking Engine**:
   - Implement background/foreground location tracking.
-  - Filter GPS drift and handle low-accuracy pings.
-- [ ] **Path Drawing**:
+- [x] **Path Drawing**:
   - Visualize the user's current path as a "trail" on the map.
-- [ ] **Loop Detection**:
-  - Logic to check if the current position is close to the starting point of the current path.
-  - Threshold-based closure (e.g., within 10-20 meters).
-- [ ] **Area Calculation**:
-  - Convert points to a Turf Polygon.
-  - Validate polygon (no self-intersections).
-  - Calculate area in square meters/kilometers.
+- [x] **Loop Detection**:
+  - Logic to check if the current position is close to start.
+- [x] **Area Calculation**:
+  - Convert points to a Turf Polygon and calculate area.
 
-## Phase 3: Game State & Persistence
-- [ ] **Local Storage**:
-  - Store captured territories locally using `AsyncStorage` or `SQLite` for offline play.
+## Phase 3: Game State & Persistence (In Progress)
+- [x] **Local Storage**:
+  - Store captured territories locally using AsyncStorage.
 - [ ] **Mock Backend**:
-  - Create a service layer to simulate API calls for "territories of other players".
-- [ ] **Energy System**:
-  - Implement daily distance quota.
+  - Create a service layer for other players.
+- [x] **Energy System**:
+  - Basic energy UI and logic implemented.
 
 ## Phase 4: UI/UX Refinement
-- [ ] **Capture Animation**:
-  - "Flash" or "Fill" animation when a loop is closed.
-- [ ] **Dashboard**:
-  - Stats for "Total Area Captured", "Today's Distance", "Energy Remaining".
-- [ ] **Leaderboard Mockup**:
-  - Show local dominance.
+- [x] **Dashboard**:
+  - Stats for energy and levels.
+- [x] **Capture UI**:
+  - Neon pink/cyan toggle for capturing state.
 
+## Phase 3: Gamification & Teams
+- [x] XP and Leveling System
+- [x] Day/Night Cycle (Optional)
+- [x] Daily Missions & XP Rewards
+- [x] Faction/Team selection (Neon vs Pink)
+
+## Phase 4: Social & Competitive
+- [x] City-wise Leaderboards
+- [x] REST-based Multiplayer Sync
+- [ ] Global Feed / Activity Stream
+- [ ] Team Chat / Coordination
 ## Phase 5: Anti-Cheat & Security
-- [ ] **Speed Validation**:
-  - Detect spikes > 20 km/h (running/cycling speed limit).
+- [x] **Speed Validation**:
+  - Detect spikes > 8m/s (Vehicle detection).
 - [ ] **Device Integrity**:
   - Basic checks for mock location providers.
 

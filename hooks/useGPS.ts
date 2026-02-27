@@ -45,24 +45,48 @@ export const useGPS = (isCapturing: boolean) => {
         return () => stopWatching();
     }, [isCapturing]);
 
+    const [sessionDistance, setSessionDistance] = useState(0);
+
     const startWatching = async () => {
         stopWatching();
         subscription.current = await Location.watchPositionAsync(
             {
-                accuracy: Location.Accuracy.BestForNavigation,
-                timeInterval: 2000,
-                distanceInterval: 5,
+                accuracy: Location.Accuracy.High,
+                timeInterval: 4000, // 4 seconds
+                distanceInterval: 10,
             },
             (location) => {
+                const { latitude, longitude, accuracy, speed } = location.coords;
+
+                // NOISE FILTERING
+                // 1. Accuracy check (reject anything > 35m)
+                if (accuracy && accuracy > 35) return;
+
+                // 2. Speed check (reject vehicle movement > 12m/s approx 43km/h)
+                if (speed && speed > 12) return;
+
                 const newPos: Position = {
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
+                    latitude,
+                    longitude,
                     timestamp: location.timestamp,
-                    accuracy: location.coords.accuracy ?? undefined,
-                    speed: location.coords.speed ?? undefined,
+                    accuracy: accuracy ?? undefined,
+                    speed: speed ?? undefined,
                 };
 
-                setCurrentPosition(newPos);
+                // Track distance if we have a previous point
+                setCurrentPosition((prev) => {
+                    if (prev) {
+                        const from = turf.point([prev.longitude, prev.latitude]);
+                        const to = turf.point([newPos.longitude, newPos.latitude]);
+                        const dist = turf.distance(from, to, { units: 'meters' });
+                        // Reject huge jumps (GPS glitches)
+                        if (dist > 1 && dist < 100) {
+                            setSessionDistance(d => d + dist);
+                        }
+                    }
+                    return newPos;
+                });
+
                 setPath((prev) => [...prev, newPos]);
             }
         );
@@ -75,9 +99,8 @@ export const useGPS = (isCapturing: boolean) => {
         }
     };
 
-    const resetPath = () => {
-        setPath([]);
-    };
+    const resetSessionDistance = () => setSessionDistance(0);
+    const resetPath = () => setPath([]);
 
-    return { currentPosition, path, errorMsg, resetPath };
+    return { currentPosition, path, sessionDistance, resetSessionDistance, errorMsg, resetPath };
 };

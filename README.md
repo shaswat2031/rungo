@@ -1,50 +1,36 @@
-# Welcome to your Expo app 👋
+# StrideRealm 🏃‍♂️🏰
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Conquer your city, one stride at a time.**
 
-## Get started
+StrideRealm is a location-based social fitness game where runners capture real-world territories by completing loops. Built with React Native (Expo) and Node.js, it turns your daily run into a strategic conquest.
 
-1. Install dependencies
+## ✨ Features
+- **Territory Capture**: Run in loops to claim city blocks as your own.
+- **National Leaderboards**: Compete for the top spot in Surat or across all of India.
+- **Real-Time Multiplayer**: See other runners on the map as "ghost trails" while they capture.
+- **Dynamic Energy System**: Manage your stamina (energy) to maximize your conquests.
+- **Hot Zones**: High-value areas with XP multipliers (Seed zones currently in Surat).
+- **Cyber-Gold Aesthetics**: Premium dark-mode UI with a high-end "Cyber" feel.
 
+## 🚀 Technical Stack
+- **Frontend**: React Native, Expo SDK, Google Maps, Lucide Icons.
+- **Backend**: Node.js, Express, Socket.io (Multiplayer Sync).
+- **Database**: MongoDB (Production ready via MongoDB Atlas).
+- **Styling**: Vanilla CSS with Glassmorphism & Micro-animations.
+
+## 🛠️ Getting Started
+1. **Setup Backend**:
    ```bash
-   npm install
+   node multiplayer_server.js
    ```
-
-2. Start the app
-
+2. **Setup Frontend**:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## 📜 Guides
+- [Game Mechanics Guide](./GAME_MECHANICS.md)
+- [Deployment Guide](./DEPLOYMENT.md)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+Developed with ❤️ for the Running Community.
