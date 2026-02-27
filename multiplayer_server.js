@@ -20,6 +20,18 @@ mongoose.connect(MONGO_URI)
     .then(() => console.log('✅ Connected to MongoDB'))
     .catch(err => console.error('❌ DB Connection Error:', err));
 
+// --- HEALTH CHECK ---
+app.get('/api/health', (req, res) => {
+    const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+    res.json({
+        status: 'ok',
+        server: 'online',
+        database: dbStatus,
+        version: '1.0.0',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // --- SCHEMAS ---
 
 const TerritorySchema = new mongoose.Schema({

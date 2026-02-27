@@ -44,7 +44,7 @@ This guide covers the 3 major steps to take StrideRealm live: GitHub setup, Back
    - `MONGODB_URI`: *Your MongoDB Atlas connection string*
    - `JWT_SECRET`: *A long random string*
    - `PORT`: `3000`
-6. **Deploy**: Render will automatically build and give you a URL (e.g., `https://striderealm-backend.onrender.com`).
+6. **Deploy**: Render will automatically build and give you a URL (e.g., `https://rungo.onrender.com`).
 
 ---
 
