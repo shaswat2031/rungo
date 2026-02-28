@@ -1,5 +1,5 @@
 import { BASE_API_URL } from '@/constants/Config';
-import { getUserStats, saveToken, saveUserStats } from '@/utils/storage';
+import { saveToken } from '@/utils/storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { ArrowRight, Eye, EyeOff, Lock, Mail, User } from 'lucide-react-native';
@@ -7,7 +7,10 @@ import React, { useState } from 'react';
 import { Alert, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown, FadeInUp, Layout } from 'react-native-reanimated';
 
+import { useGameState } from '@/hooks/useGameState';
+
 export default function AuthScreen() {
+    const { updateStats } = useGameState();
     const [isRegister, setIsRegister] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -53,9 +56,7 @@ export default function AuthScreen() {
             // Save token and user info
             if (data.token) {
                 await saveToken(data.token);
-                const currentStats = await getUserStats();
-                await saveUserStats({
-                    ...currentStats,
+                await updateStats({
                     userId: data.user.userId,
                     username: data.user.username,
                     email: data.user.email,
